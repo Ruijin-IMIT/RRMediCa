@@ -1,7 +1,6 @@
 
-import dataset
-
-from common import *
+from . import dataset
+from .common import *
 
 train_batch_size = 128 #256#128# 512
 test_batch_size = 128 #256#128 #512
@@ -84,14 +83,10 @@ def ensemble(ckpts_root, results, gts):
             continue
         acc = confident_flags.sum() / len(confident_flags)
         print(f"Ensemble (at least {prob_thres*100} % confidence, total={len(confident_flags)}) acc=", round(acc, 3))
+    return preds_ensenble
 
 def select_and_ensemble(ckpts_root, results, gts):
-    # preds_list = [results[r_key]['preds'] for r_key in results]
-    # case_N = len(gts)
-    # preds_list = [l for l in preds_list if (l == gts).sum() / len(gts) > 0.6]
-
     model_dir_names = set([r_key.split('/')[0] for r_key in results])
-
     model_keys = []
     for model_dir_name in model_dir_names:
         if not os.path.isdir(os.path.join(ckpts_root, model_dir_name)):
@@ -153,19 +148,14 @@ def select_and_ensemble(ckpts_root, results, gts):
         print(f"Ensemble (at least {prob_thres*100} % confidence, total={len(confident_flags)}) acc=", round(acc, 3))
 
 
-def test_project_RJPD():
-    database = '/home/fakai/Documents/Data/RRMediCa/test_lesion_crops'
-    ckpts_root = '/home/fakai/Documents/Data/RRMediCa/selected_ckpts'
+def test_project_RJPD(database, ckpts_root, model_keys=None, force_predict=True):
     class_names = ['label']
     data_container = dataset.Data_container(database, class_names)
     target_classes, target_class_counts = data_container.get_stats_class_distribution()
     print(target_classes, target_class_counts)
-    device = 'cuda:0'
 
-
-    model_names = ['VGG1.1', 'VGG1.3', 'VGG1.5',  'resnet1.1',  'resnet1.2',  'resnet1.3', 'shufflenet1.1', 'shufflenet1.2', 'shufflenet1.3', 'densenet1.1', 'densenet1.2', 'densenet1.3']
-
-    model_keys = ['Aux_resnet1.3_QSM/Aux_resnet1.3_F3_last.pth', 'Aux_VGG1.3_NM/Aux_VGG1.3_F2_last.pth',
+    if model_keys is None:
+        model_keys = ['Aux_resnet1.3_QSM/Aux_resnet1.3_F3_last.pth', 'Aux_VGG1.3_NM/Aux_VGG1.3_F2_last.pth',
                   'Aux_VGG1.5_QSM/Aux_VGG1.5_F4_last.pth', 'Aux_resnet1.2_NM/Aux_resnet1.2_F2_last.pth',
                   'Aux_shufflenet1.1_NM/Aux_shufflenet1.1_F2_last.pth', 'Aux_resnet1.1_NM/Aux_resnet1.1_F2_last.pth',
                   'Aux_densenet1.1_NM/Aux_densenet1.1_F2_last.pth',
@@ -188,7 +178,6 @@ def test_project_RJPD():
         return models
         
     models = find_models(ckpts_root)
-
     models = [os.path.join(ckpts_root, key) for key in model_keys]
     print(f'Selected models:{models}')
 
@@ -205,7 +194,7 @@ def test_project_RJPD():
 
     ensemble_result_file = os.path.join(ckpts_root, 'ensemble_results.pkl')
     ensemble_result_file = os.path.join(ckpts_root, 'last_ensemble_results.pkl')
-    if os.path.exists(ensemble_result_file):
+    if not force_predict and os.path.exists(ensemble_result_file):
         with open(ensemble_result_file, 'rb') as f:
             results = pickle.load(f)
     else:
@@ -215,12 +204,16 @@ def test_project_RJPD():
 
     for r_key in results:
         gts = results[r_key]['gts']
+        case_names = results[r_key]['case_names']
         break
-
-    ensemble(ckpts_root, results, gts)
+    # About dims: preds_ensenble and gts are of shape C * T, C = case number, T = target number
+    preds_ensenble = ensemble(ckpts_root, results, gts)
+    return case_names, preds_ensenble, gts
 
 
 if __name__ == '__main__':
-    test_project_RJPD()
+    database = '/media/wfk/Tai/WFK_Data/RJ-PD/PDCADxFoundationRelease/train_data/train_lesion_crops'
+    ckpts_root = '/home/wfk/BaiduYun/selected_ckpts'
+    test_project_RJPD(database, ckpts_root)
 
 

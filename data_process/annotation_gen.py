@@ -39,7 +39,8 @@ def create_annotation_from_mask_RJPD(database, pd_map, qsm_labels, nm_labels):
     for case_name in case_names:
         print(case_name)
         case_dir = os.path.join(database, case_name)
-
+        if not os.path.isdir(case_dir):
+            continue
         qsm_mask_path = os.path.join(case_dir, 'QSM_mask.nii.gz')
         qsm_mask_image = sitk.ReadImage(qsm_mask_path)
         spacing = qsm_mask_image.GetSpacing()
@@ -91,7 +92,7 @@ def create_annotation_from_mask_RJPD(database, pd_map, qsm_labels, nm_labels):
         lesion = {
             "id": "0",
             "tag": "RJPD",
-            "label": pd_map[case_name],
+            "label": pd_map.get(case_name, '0'),
             "nifti_files": "['QSM.nii.gz', 'NM.nii.gz']",
             "phy_loc_xyz": f"[{qsm_phy_loc_xyz_str}, {nm_phy_loc_xyz_str}]",
             "np_loc_zyx": f"[{qsm_np_loc_zyx_str}, {nm_np_loc_zyx_str}]",
@@ -105,28 +106,29 @@ def create_annotation_from_mask_RJPD(database, pd_map, qsm_labels, nm_labels):
 
         # break
 
-'''
-    Gen annotations for train data
-'''
-database = '/media/wfk/Tai/WFK_Data/RJ-PD/PDCADxFoundationRelease/train_data/train'
-pd_class_csv = '/media/wfk/Tai/WFK_Data/RJ-PD/PDCADxFoundationRelease/train_data/train_cases.csv'
-def load_pd_class_csv(pd_class_csv):
-    with open(pd_class_csv, 'r') as f:
-        lines = f.readlines()
-    d = {l.split(',')[0].strip(): l.split(',')[1].strip() for l in lines}
-    return d
+if __name__ == '__main__':
+    '''
+        Gen annotations for train data
+    '''
+    database = '/media/wfk/Tai/WFK_Data/RJ-PD/PDCADxFoundationRelease/train_data/train'
+    pd_class_csv = '/media/wfk/Tai/WFK_Data/RJ-PD/PDCADxFoundationRelease/train_data/train_cases.csv'
+    def load_pd_class_csv(pd_class_csv):
+        with open(pd_class_csv, 'r') as f:
+            lines = f.readlines()
+        d = {l.split(',')[0].strip(): l.split(',')[1].strip() for l in lines}
+        return d
 
-'''
-    Gen annotations for val data
-'''
-database = '/media/wfk/Tai/WFK_Data/RJ-PD/data20250615/val'
-pd_class_csv = '/media/wfk/Tai/WFK_Data/RJ-PD/PDCADxFoundationRelease/val_data/val_cases.csv'
+    '''
+        Gen annotations for val data
+    '''
+    database = '/media/wfk/Tai/WFK_Data/RJ-PD/data20250615/val'
+    pd_class_csv = '/media/wfk/Tai/WFK_Data/RJ-PD/PDCADxFoundationRelease/val_data/val_cases.csv'
 
-'''
-    Gen annotations for test data
-'''
-database = '/media/wfk/Tai/WFK_Data/RJ-PD/PDCADxFoundationRelease/test_data/test'
-pd_class_csv = '/media/wfk/Tai/WFK_Data/RJ-PD/PDCADxFoundationRelease/test_data/test_cases.csv'
-pd_map = load_pd_class_csv(pd_class_csv)
-create_annotation_from_mask_RJPD(database, pd_map, [9,10,11,12], [1,2])
+    '''
+        Gen annotations for test data
+    '''
+    database = '/media/wfk/Tai/WFK_Data/RJ-PD/PDCADxFoundationRelease/test_data/test'
+    pd_class_csv = '/media/wfk/Tai/WFK_Data/RJ-PD/PDCADxFoundationRelease/test_data/test_cases.csv'
+    # pd_map = load_pd_class_csv(pd_class_csv)
+    # create_annotation_from_mask_RJPD(database, pd_map, [9,10,11,12, 13,14], [1,2])
 

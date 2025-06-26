@@ -5,8 +5,8 @@ import os
 import numpy as np
 import pickle
 
-from models import *
-from utils import progress_bar
+from .models import *
+from .utils import progress_bar
 
 import logging
 def setup_logger(name, log_file='app.log', level=logging.INFO):
