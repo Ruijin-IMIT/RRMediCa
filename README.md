@@ -1,7 +1,7 @@
 # RRMediCa
 
 #### Description
-Ruijin Medical Imaging Classification Framework, designed for 3D medical imaging such as CT and MR, 
+Ruijin Radiology Medical Imaging Classification Architecture (RRMediCa), designed for 3D medical imaging such as CT and MR, 
 supports multi-modal input and multi-target prediction, provides commonly used deep learning network architectures, 
 and simplifies the model training and prediction process. It is designed for the 3D medical image classification
 scenarios, taking specific needs into consideration to improve research/experiment efficiency.
