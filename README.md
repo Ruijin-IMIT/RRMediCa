@@ -132,19 +132,49 @@ T2WI, Late Arterial Phase, Portal Vein Phase, Delay Phase, In Phase, Out Phase, 
 are lesion MR imaging features, which are compatible with the Li-RADS definitions. The implementation is in models/crn.py.
 ![CRN](images/fig_crn.jpg)
 
+Liver lesion sample (a HCC):
+<div style="display: flex; overflow-x: auto; gap: 5px;">
+    <img src="images/CRN/lesion-hcc/0preartery-test.gif" width="100">
+    <img src="images/CRN/lesion-hcc/1lap-test.gif" width="100">
+    <img src="images/CRN/lesion-hcc/2pv-test.gif" width="100">
+    <img src="images/CRN/lesion-hcc/3delay-test.gif" width="100">
+    <img src="images/CRN/lesion-hcc/4ip-test.gif" width="100">
+    <img src="images/CRN/lesion-hcc/5op-test.gif" width="100">
+    <img src="images/CRN/lesion-hcc/6t2-test.gif" width="100">
+    <img src="images/CRN/lesion-hcc/7dwi(b0)-test.gif" width="100">
+    <img src="images/CRN/lesion-hcc/8dwi(b1)-test.gif" width="100">
+    <img src="images/CRN/lesion-hcc/9adc-test.gif" width="100">
+</div>
+
+
+Liver lesion sample (a Hemangioma):
+<div style="display: flex; overflow-x: auto; gap: 5px;">
+    <img src="images/CRN/lesion-hem/0preartery-test.gif" width="100">
+    <img src="images/CRN/lesion-hem/1lap-test.gif" width="100">
+    <img src="images/CRN/lesion-hem/2pv-test.gif" width="100">
+    <img src="images/CRN/lesion-hem/3delay-test.gif" width="100">
+    <img src="images/CRN/lesion-hem/4ip-test.gif" width="100">
+    <img src="images/CRN/lesion-hem/5op-test.gif" width="100">
+    <img src="images/CRN/lesion-hem/6t2-test.gif" width="100">
+    <img src="images/CRN/lesion-hem/7dwi(b0)-test.gif" width="100">
+    <img src="images/CRN/lesion-hem/8dwi(b1)-test.gif" width="100">
+    <img src="images/CRN/lesion-hem/9adc-test.gif" width="100">
+</div>
+
 Liver lesion sample (a Cyst):
 <div style="display: flex; overflow-x: auto; gap: 5px;">
-    <img src="images/CRN/lesionx/0preartery-test.gif" width="100">
-    <img src="images/CRN/lesionx/1lap-test.gif" width="100">
-    <img src="images/CRN/lesionx/2pv-test.gif" width="100">
-    <img src="images/CRN/lesionx/3delay-test.gif" width="100">
-    <img src="images/CRN/lesionx/4ip-test.gif" width="100">
-    <img src="images/CRN/lesionx/5op-test.gif" width="100">
-    <img src="images/CRN/lesionx/6t2-test.gif" width="100">
-    <img src="images/CRN/lesionx/7dwi(b0)-test.gif" width="100">
-    <img src="images/CRN/lesionx/8dwi(b1)-test.gif" width="100">
-    <img src="images/CRN/lesionx/9adc-test.gif" width="100">
+    <img src="images/CRN/lesion-cyst/0preartery-test.gif" width="100">
+    <img src="images/CRN/lesion-cyst/1lap-test.gif" width="100">
+    <img src="images/CRN/lesion-cyst/2pv-test.gif" width="100">
+    <img src="images/CRN/lesion-cyst/3delay-test.gif" width="100">
+    <img src="images/CRN/lesion-cyst/4ip-test.gif" width="100">
+    <img src="images/CRN/lesion-cyst/5op-test.gif" width="100">
+    <img src="images/CRN/lesion-cyst/6t2-test.gif" width="100">
+    <img src="images/CRN/lesion-cyst/7dwi(b0)-test.gif" width="100">
+    <img src="images/CRN/lesion-cyst/8dwi(b1)-test.gif" width="100">
+    <img src="images/CRN/lesion-cyst/9adc-test.gif" width="100">
 </div>
+
 
 Each patient lesion folder contains the ROIs for 10 MR sequences, as well as the imaging feature annotations.
 One example input folder is like
@@ -166,7 +196,7 @@ case2102_lesion0_25.4mm/
 ```
 
 
-Please note this CRN paper is under submission to Medical Image Analysis journal (Aug. 2025).
+Please note this CRN paper is under submission to the Medical Image Analysis journal (Aug. 2025).
 
 
 
