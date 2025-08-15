@@ -113,12 +113,21 @@ python test.py
 ```
 
 
-
+## Self-defined Networks & Projects
 #### Correlation Routing Network for explainable lesion classification in multi-parametric liver MRIs
 The CRN model builds upon the RRMediCa framework. The inputs are the lesion ROIs in liver MR sequences, including T1WI,
 T2WI, Late Arterial Phase, Portal Vein Phase, Delay Phase, In Phase, Out Phase, DWI(b=0), DWI(b=1), ADC. The predictions 
 are lesion MR imaging features, which are compatible with the Li-RADS definitions. The implementation is in models/crn_aux.py.
 ![CRN](images/fig_crn.jpg)
+
+Samples:
+
+input folder architecture:
+
+
+
+
+Please note this CRN paper is under submission to Medical Image Analysis journal (Aug. 2025).
 
 
 
