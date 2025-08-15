@@ -132,6 +132,9 @@ T2WI, Late Arterial Phase, Portal Vein Phase, Delay Phase, In Phase, Out Phase, 
 are lesion MR imaging features, which are compatible with the Li-RADS definitions. The implementation is in models/crn.py.
 ![CRN](images/fig_crn.jpg)
 
+The liver lesions in Multi-parametric MRIs (sequence order: t1, lap, pv, delay, ip, op, t2, dwi(b0), dwi(b1), adc) 
+
+
 Liver lesion sample (a HCC):
 <div style="display: flex; overflow-x: auto; gap: 5px;">
     <img src="images/CRN/lesion-hcc/0preartery-test.gif" width="100">
