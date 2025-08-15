@@ -14,6 +14,18 @@ The predicting targets can also be configured, and the MediCa supports detailed 
 predictions). In this way, you can try and compare different networks quickly and make judgement. 
 ![MediCa](./images/MediCa.png)
 
+#### Implementation details
+The RRMediCa framework adopts the 5-fold cross-validation scheme. By default, the database would be split into 5 folds, 
+and it supports training and validation for 5 folds with the least required efforts.
+![5-fold cross-validation](images/datasplit-5fold.png)
+
+
+Data augmentations. Due to the limited size of medical data collection and the high annotation cost, RRMediCa framework
+employs as thorough augmentations as possible during the training, to maximize the information exploration. Here are some 
+augmentation examples for lesion classification,
+![data augmentaion](images/data-augmentations.png)
+
+
 #### Installation & Usage
 
 ```Install the dependencies
@@ -120,11 +132,38 @@ T2WI, Late Arterial Phase, Portal Vein Phase, Delay Phase, In Phase, Out Phase, 
 are lesion MR imaging features, which are compatible with the Li-RADS definitions. The implementation is in models/crn.py.
 ![CRN](images/fig_crn.jpg)
 
-Samples:
+Liver lesion sample (a Cyst):
+<div style="display: flex; overflow-x: auto; gap: 5px;">
+    <img src="images/CRN/lesionx/0preartery-test.gif" width="100">
+    <img src="images/CRN/lesionx/1lap-test.gif" width="100">
+    <img src="images/CRN/lesionx/2pv-test.gif" width="100">
+    <img src="images/CRN/lesionx/3delay-test.gif" width="100">
+    <img src="images/CRN/lesionx/4ip-test.gif" width="100">
+    <img src="images/CRN/lesionx/5op-test.gif" width="100">
+    <img src="images/CRN/lesionx/6t2-test.gif" width="100">
+    <img src="images/CRN/lesionx/7dwi(b0)-test.gif" width="100">
+    <img src="images/CRN/lesionx/8dwi(b1)-test.gif" width="100">
+    <img src="images/CRN/lesionx/9adc-test.gif" width="100">
+</div>
 
-input folder architecture:
+Each patient lesion folder contains the ROIs for 10 MR sequences, as well as the imaging feature annotations.
+One example input folder is like
 
+```bash
+case2102_lesion0_25.4mm/
+├── adc.nii.gz
+├── annotations.json
+├── delay.nii.gz
+├── dwi(b0).nii.gz
+├── dwi(b1).nii.gz
+├── ip.nii.gz
+├── lap.nii.gz
+├── op.nii.gz
+├── preartery.nii.gz
+├── pv.nii.gz
+└── t2.nii.gz
 
+```
 
 
 Please note this CRN paper is under submission to Medical Image Analysis journal (Aug. 2025).
