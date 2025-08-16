@@ -1,4 +1,9 @@
-'''VGG11/13/16/19 in Pytorch.'''
+
+'''
+Author: Fakai Wang
+Affiliation: Ruijn Hospital, Shanghai Jiao Tong University School of Medicine
+
+'''
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
