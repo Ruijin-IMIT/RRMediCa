@@ -217,7 +217,7 @@ class CRN(nn.Module):
             output = F.avg_pool2d(output, 4)
             output = F.adaptive_avg_pool2d(output, (1, 1))
             features = output.view(output.size(0), 1, -1)
-            features_all.append(features) # TODO: add attention mechanism here, before classification
+            features_all.append(features)
         x = torch.cat(features_all, 1)
         x = x + self.drop_path(self.attn(self.norm1(x)))
         x = x + self.drop_path(self.mlp(self.norm2(x)))
