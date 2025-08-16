@@ -1,4 +1,9 @@
-'''Train CIFAR10 with PyTorch.'''
+'''
+Author: Fakai Wang
+Affiliation: Ruijn Hospital, Shanghai Jiao Tong University School of Medicine
+
+'''
+
 import torch
 import torch.optim as optim
 import os

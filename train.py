@@ -1,3 +1,8 @@
+'''
+Author: Fakai Wang
+Affiliation: Ruijn Hospital, Shanghai Jiao Tong University School of Medicine
+
+'''
 
 from common import *
 import dataset
